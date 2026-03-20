@@ -1,14 +1,85 @@
-<h1>Guessing Game Score Tracker</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Score Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        input {
+            padding: 8px;
+            margin: 8px 0;
+            width: 100%;
+        }
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .delete-btn {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Leaderboard App</h1>
 
-<form method="POST">
-    Name: <input type="text" name="name" required><br>
-    Score: <input type="number" name="score" required><br>
-    <button type="submit">Submit</button>
-</form>
+    <form method="POST">
+        <label>Name</label>
+        <input type="text" name="name" required>
 
-<h2>Leaderboard</h2>
-<ul>
-{% for row in scores %}
-    <li>{{row[1]}} - {{row[2]}}</li>
-{% endfor %}
-</ul>
+        <label>Score</label>
+        <input type="number" name="score" required>
+
+        <button type="submit">Add Score</button>
+    </form>
+
+    <h2>Top Scores</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Score</th>
+            <th>Action</th>
+        </tr>
+        {% for row in scores %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>
+                <form action="/delete/{{ row[0] }}" method="POST" style="margin:0;">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
