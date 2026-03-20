@@ -1,0 +1,14 @@
+<h1>Guessing Game Score Tracker</h1>
+
+<form method="POST">
+    Name: <input type="text" name="name" required><br>
+    Score: <input type="number" name="score" required><br>
+    <button type="submit">Submit</button>
+</form>
+
+<h2>Leaderboard</h2>
+<ul>
+{% for row in scores %}
+    <li>{{row[1]}} - {{row[2]}}</li>
+{% endfor %}
+</ul>
